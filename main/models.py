@@ -13,3 +13,17 @@ class Discounts(models.Model):
 
     def str(self):
         return self.name
+    
+
+
+class About(models.Model):
+    text = models.TextField()
+    image = models.ImageField()
+
+    def __str__(self) -> str:
+        return self.text
+    
+
+class Service(models.Model):
+    image = models.ImageField(upload_to='')
+    description = models.CharField(max_length=255)

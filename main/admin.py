@@ -1,2 +1,7 @@
 from django.contrib import admin
-from . import models
+from .models import (About,
+                     Service)
+
+
+admin.site.register(About)
+admin.site.register(Service)
