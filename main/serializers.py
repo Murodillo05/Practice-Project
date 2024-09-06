@@ -1,5 +1,9 @@
 from .models import *
 from rest_framework import serializers
+class DiscountsSerializers(serializers.ModelSerializer):
+    class Meta:
+        model=Discounts
+        fields = 'all'
 
 class AboutSerializer(serializers.ModelSerializer):
     class Meta:
