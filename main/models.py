@@ -45,6 +45,6 @@ class Testimonal(models.Model):
     image = models.ImageField(upload_to='images/')
     full_name = models.CharField(max_length=30)
     text = models.TextField()
-
+#rfjrgh
     def __init__(self):
         return self.full_name
