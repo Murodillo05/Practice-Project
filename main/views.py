@@ -5,21 +5,21 @@ from . models import  About, Service, Discounts
 from .serializers import AboutSerializer, ServiceSerializer,DiscountsSerializers
 from . import serializers
 from django.shortcuts import render
-
+ 
 @api_view(['GET', 'POST'])
-def Discounts_get(request):
+def discounts(request):
     if request.method == 'GET':
-     discounts = Discounts.objects.all()
-     Discounts_ser = DiscountsSerializers(discounts, many = True)
-     return Response(Discounts_ser.data, status=status.HTTP_200_OK)
+        discounts = Discounts.objects.all()
+        discounts_serializer = DiscountsSerializers(discounts, many=True)
+        return Response(discounts_serializer.data, status=status.HTTP_200_OK)
 
+    elif request.method == 'POST':
+        serializer = DiscountsSerializers(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-def Discounts_post(self, request):
-    if request.method == 'POST':
-       discounts = Discounts_post.all()
-       Discounts_ser = DiscountsSerializers(discounts, many = True)
-       return Response(Discounts_ser.data , status=status.HTTP_201_CREATED)
-    return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET', 'POST'])
