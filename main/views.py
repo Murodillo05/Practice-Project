@@ -50,7 +50,7 @@ def questions(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET'])
+@api_view(['GET, POST'])
 def testimonal(request):
     if request.method == "GET":
         testimonal = Testimonal.objects.last()
@@ -109,3 +109,39 @@ def service_view(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET, POST'])
+def apartments(request):
+    if request.method == "GET":
+        apartments = Apartments.objects.all()
+        apartments_ser = ApartmentsSerializer(apartments)
+        return Response(apartments_ser.data)
+
+    elif request.method == "POST":
+        serializer = ApartmentsSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+@api_view(['GET, POST'])
+def apartmentsinfo(request):
+    if request.method == "GET":
+        ap_info = Apartments_info.objects.all()
+        apinfo_ser = Apartments_infoSerializer(ap_info)
+        return Response(apinfo_ser.data)
+
+    elif request.method == "POST":
+        serializer = Apartments_infoSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+

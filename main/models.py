@@ -60,3 +60,38 @@ class About(models.Model):
 class Service(models.Model):
     image = models.ImageField(upload_to='')
     description = models.CharField(max_length=255)
+
+
+
+class Apartments(models.Model):
+    img = models.ImageField(upload_to='images/')
+    name = models.CharField(max_length=255)
+    number_of_apartments = models.CharField(max_length=255)
+    standard_price = models.CharField(max_length=90)
+    credit = models.CharField(max_length=90)
+    credit_time = models.CharField(max_length=70)
+    apartmentsand_studios = models.CharField(max_length=90)
+    price = models.CharField(max_length=255)
+    fields = models.CharField(max_length=40)
+    location = models.CharField(max_length=255)
+
+
+    def __str__(self):
+        return self.name
+    
+
+class Apartments_info(models.Model):
+    rooms_of_apartment_and_metres = models.CharField(max_length=255)
+    standard_price = models.CharField(max_length=255)
+    recomendations = models.CharField(max_length=255)
+    metres = models.CharField(max_length=255)
+    adress = models.CharField(max_length=255)
+    korpus = models.CharField(max_length=30)
+    ochered = models.CharField(max_length=40)
+    sdacha = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='images/')
+
+
+    def __str__(self):
+        return self.rooms_of_apartment_and_metres
+    
