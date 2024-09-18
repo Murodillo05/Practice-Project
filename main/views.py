@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-from django.shortcuts import render
-
-
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -114,4 +110,3 @@ def service_view(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
->>>>>>> c27db3c18948829ec8e5235ab213c708d22e6e4c
