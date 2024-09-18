@@ -1,6 +1,10 @@
+from django.shortcuts import render
+
+
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from .serializers import *
 
 
 
@@ -84,7 +88,7 @@ def discounts(request):
 @api_view(['GET', 'POST'])
 def about_view(request):
     if request.method == 'GET':
-        banners = About.objects.all()
+        banners = About.objects.get()
         serializer = AboutSerializer(banners, many=True)
         return Response(serializer.data)
 
