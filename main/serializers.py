@@ -42,3 +42,17 @@ class ServiceSerializer(serializers.ModelSerializer):
         model = Service
         fields = '__all__'
 
+
+
+class ApartmentsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Apartments
+        fields = '__all__'
+
+
+class Apartments_infoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Apartments_info
+        fields = '__all__'
+
+
