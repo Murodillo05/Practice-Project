@@ -30,15 +30,23 @@ class DiscountsSerializers(serializers.ModelSerializer):
         model=Discounts
         fields = 'all'
 
+# class AboutSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = About
+#         fields = '_   _all__'
+
 class AboutSerializer(serializers.ModelSerializer):
     class Meta:
-        models = About
-        fields = '_all__'
-
-
+        model = About  # This should be your model name
+        fields = '__all__'  # Or specify the fields you want to include
 
 class ServiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Service
         fields = '__all__'
+        
 
+class DiscountsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Discounts
+        fields = '__all__' # You can specify fields explicitly if needed
