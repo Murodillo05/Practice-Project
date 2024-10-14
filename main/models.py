@@ -47,7 +47,6 @@ class Testimonal(models.Model):
     full_name = models.CharField(max_length=30)
     text = models.TextField()
     is_active = models.BooleanField(default=True)
-#rfjrgh
     def __init__(self):
         return self.full_name
 

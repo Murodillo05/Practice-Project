@@ -39,14 +39,23 @@ class ProgramInfoCreateView(generics.CreateAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET', 'POST'])
-def program(request):
-    if request.method == "GET":
-        program = Program.objects.filter(is_active=True)
-        program_ser = ProgramSerializer(program, many=True)
+class ProgramView(APIView):
+
+    @swagger_auto_schema(
+        responses={200: ProgramSerializer(many=True)},
+        operation_description="desription"
+    )
+    def get(self, request, format=None):
+        programs = Program.objects.filter(is_active=True)
+        program_ser = ProgramSerializer(programs, many=True)
         return Response(program_ser.data)
 
-    elif request.method == "POST":
+    @swagger_auto_schema(
+        request_body=ProgramSerializer,
+        responses={201: ProgramSerializer, 400: 'Error'},
+        operation_description="operation_description"
+    )
+    def post(self, request, format=None):
         serializer = ProgramSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -54,34 +63,53 @@ def program(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET', 'POST'])
-def questions(request):
-    if request.method == "GET":
+
+class QuestionsView(APIView):
+
+    @swagger_auto_schema(
+        responses={200: QuestionSerializer(many=True)},
+        operation_description="Decscription"
+    )
+    def get(self, request, format=None):
         questions = Questions.objects.filter(is_active=True)
         questions_ser = QuestionSerializer(questions, many=True)
         return Response(questions_ser.data)
 
-    elif request.method == "POST":
+    @swagger_auto_schema(
+        request_body=QuestionSerializer,
+        responses={201: QuestionSerializer, 400: 'Error'},
+        operation_description="operation_description"
+    )
+    def post(self, request, format=None):
         serializer = QuestionSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
-@api_view(['GET', 'POST'])
-def testimonal(request):
-    if request.method == "GET":
-        testimonal = Testimonal.objects.filter(is_active=True)
-        testimonal_ser = TestimonalSerializer(testimonal, many=True)
+class TestimonalAPIView(APIView):
+    
+    @swagger_auto_schema(
+        responses={200: TestimonalSerializer(many=True)},
+        operation_description="description"
+    )
+    def get(self, request):
+        testimonals = Testimonal.objects.filter(is_active=True)
+        testimonal_ser = TestimonalSerializer(testimonals, many=True)
         return Response(testimonal_ser.data)
 
-    elif request.method == "POST":
+    @swagger_auto_schema(
+        request_body=TestimonalSerializer,
+        responses={201: TestimonalSerializer, 400: 'Error'},
+        operation_description="operation_description"
+    )
+    def post(self, request):
         serializer = TestimonalSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 class DiscountsCreate(generics.CreateAPIView):
@@ -127,7 +155,6 @@ class AboutView(APIView):
         responses={200: AboutSerializer(many=True)}
     )
     def get(self, request, *args, **kwargs):
-        # Retrieve all active About objects
         banners = About.objects.filter(is_active=True)
         serializer = AboutSerializer(banners, many=True)
         return Response(serializer.data)
@@ -137,7 +164,6 @@ class AboutView(APIView):
         responses={201: AboutSerializer, 400: 'Bad Request'}
     )
     def post(self, request, *args, **kwargs):
-        # Create a new About object
         serializer = AboutSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -152,7 +178,6 @@ class ServiceView(APIView):
         responses={200: ServiceSerializer(many=True)}
     )
     def get(self, request, *args, **kwargs):
-        # Retrieve all active Service objects
         services = Service.objects.filter(is_active=True)
         serializer = ServiceSerializer(services, many=True)
         return Response(serializer.data)
@@ -162,7 +187,6 @@ class ServiceView(APIView):
         responses={201: ServiceSerializer, 400: 'Bad Request'}
     )
     def post(self, request, *args, **kwargs):
-        # Create a new Service object
         serializer = ServiceSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
