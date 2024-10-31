@@ -13,6 +13,5 @@ urlpatterns = [
     path('testimonals/', TestimonalAPIView.as_view(), name='testimonals'),
     path('questions/', QuestionsView.as_view(), name='questions-list-create'),
     path('programs/', ProgramView.as_view(), name='program-list-create'),
-] 
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
